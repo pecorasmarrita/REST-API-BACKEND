@@ -48,7 +48,20 @@ switch($method) {
     break;
 
   case 'PUT':
-    // TODO
+	$id = $_PUT['id'];
+	$name = $_PUT['name'];
+	$surname = $_PUT['surname'];
+	$sidi_code = $_PUT['sidi_code'];
+    $tax_code = $_PUT['tax_code'];
+	if (isset($id, $name, $surname, $sidi_code, $tax_code)){
+      $student = $student->updatestudent($id, $name, $surname, $sidi_code, $tax_code);
+    }else{
+      echo("Dati inseriti non corretti");
+    }
+	$students = $student->all();
+	$js_encode = json_encode(array('state'=>TRUE, 'students'=>$students),true);
+	header("Content-Type: application/json");
+	echo($js_encode);
     break;
 
   default:

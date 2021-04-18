@@ -51,13 +51,11 @@ class Student
   }
   
   public function updatestudent ($id, $name, $surname, $sidi_code, $tax_code){
-    $sql = "INSERTO INTO student VALUES ('"+$id+"','"+$name+"','"+$surname+"','"+$sidi_code+"','"+$tax_code+"')"; // Inserire dal 1700 in poi
+    $sql = "UPDATE student SET name='"+$name+"', surname='"+$surname+"', sidi_code='"+$sidi_code+"', tax_code='"+$tax_code+"' WHERE id='"+$id+"'";
     $stmt = $this->db->prepare($sql);
     $stmt->execute();
   }
   
-  
-  
-  
+
 }
 ?>
