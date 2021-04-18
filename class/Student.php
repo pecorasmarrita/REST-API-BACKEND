@@ -33,7 +33,7 @@ class Student
   }
   
   public function deletestudent ($id){
-    $sql = "DELETE FROM student WHERE id='"+$id+"'"; // È possibile cancellare solo dal 1700 in poi, prima foreign key non lo permettono
+    $sql = "DELETE FROM student WHERE id='".$id."'"; // È possibile cancellare solo dal 1700 in poi, prima foreign key non lo permettono
     $stmt = $this->db->prepare($sql);
     $stmt->execute();
   }
@@ -45,13 +45,13 @@ class Student
   }
   
   public function addstudent ($id, $name, $surname, $sidi_code, $tax_code){
-    $sql = "INSERTO INTO student VALUES ('"+$id+"','"+$name+"','"+$surname+"','"+$sidi_code+"','"+$tax_code+"')"; // Inserire dal 1700 in poi
+    $sql = "INSERTO INTO student VALUES ('".$id."','".$name."','".$surname."','".$sidi_code."','".$tax_code."')"; // Inserire dal 1700 in poi
     $stmt = $this->db->prepare($sql);
     $stmt->execute();
   }
   
   public function updatestudent ($id, $name, $surname, $sidi_code, $tax_code){
-    $sql = "UPDATE student SET name='"+$name+"', surname='"+$surname+"', sidi_code='"+$sidi_code+"', tax_code='"+$tax_code+"' WHERE id='"+$id+"'";
+    $sql = "UPDATE student SET name='".$name."', surname='".$surname."', sidi_code='".$sidi_code."', tax_code='".$tax_code."' WHERE id='".$id."'";
     $stmt = $this->db->prepare($sql);
     $stmt->execute();
   }
