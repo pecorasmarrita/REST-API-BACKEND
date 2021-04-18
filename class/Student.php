@@ -45,7 +45,7 @@ class Student
   }
   
   public function addstudent ($id, $name, $surname, $sidi_code, $tax_code){
-    $sql = "INSERTO INTO student VALUES ('".$id."','".$name."','".$surname."','".$sidi_code."','".$tax_code."')"; // Inserire dal 1700 in poi
+    $sql = "INSERT INTO student VALUES ('".$id."','".$name."','".$surname."','".$sidi_code."','".$tax_code."')"; // Inserire dal 1700 in poi
     $stmt = $this->db->prepare($sql);
     $stmt->execute();
   }
