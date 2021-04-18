@@ -35,7 +35,8 @@ switch($method) {
 	break;
 
   case 'DELETE':
-    $id = $_DELETE['id'];
+	parse_str(file_get_contents("php://input"),$post_vars);
+    $id = $post_vars['id'];
 	if (isset($id)){
       $student->deletestudent($id);
     }else{
@@ -48,11 +49,12 @@ switch($method) {
     break;
 
   case 'PUT':
-	$id = $_PUT['id'];
-	$name = $_PUT['name'];
-	$surname = $_PUT['surname'];
-	$sidi_code = $_PUT['sidi_code'];
-    $tax_code = $_PUT['tax_code'];
+	parse_str(file_get_contents("php://input"),$post_vars);
+	$id = $post_vars['id'];
+	$name = $post_vars['name'];
+	$surname = $post_vars['surname'];
+	$sidi_code = $post_vars['sidi_code'];
+    $tax_code = $post_vars['tax_code'];
 	if (isset($id, $name, $surname, $sidi_code, $tax_code)){
       $student = $student->updatestudent($id, $name, $surname, $sidi_code, $tax_code);
     }else{
