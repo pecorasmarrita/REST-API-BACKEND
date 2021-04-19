@@ -18,16 +18,23 @@ switch($method) {
     break;
 
   case 'POST':
-    $id = $_POST['id'];
 	$name = $_POST['name'];
 	$surname = $_POST['surname'];
 	$sidi_code = $_POST['sidi_code'];
     $tax_code = $_POST['tax_code'];
-	if (isset($id, $name, $surname, $sidi_code, $tax_code)){
-      $student = $student->addstudent($id, $name, $surname, $sidi_code, $tax_code);
+	if (isset($name, $surname, $sidi_code, $tax_code)){
+      $result = $student->addstudent($name, $surname, $sidi_code, $tax_code);
     }else{
       echo("Dati inseriti non corretti");
     }
+    	if ($result>0)
+    	{
+    		echo("Sono stati aggiunti".$result."studenti");
+    	}
+    	else 
+    	{
+    		echo("Non sono stati aggiunti studenti");
+    	}
 	$students = $student->all();
 	$js_encode = json_encode(array('state'=>TRUE, 'students'=>$students),true);
 	header("Content-Type: application/json");
@@ -38,10 +45,18 @@ switch($method) {
 	parse_str(file_get_contents("php://input"),$post_vars);
     $id = $post_vars['id'];
 	if (isset($id)){
-      $student->deletestudent($id);
+      $result = $student->deletestudent($id);
     }else{
-      $student->deleteallstudents();
+      $result = $student->deleteallstudents();
     }
+    	if ($result>0)
+    	{
+    		echo("Sono state cancellate".$result."righe");
+    	}
+    	else 
+    	{
+    		echo("Non sono stati trovati studenti con tale ID");
+    	}
 	$students = $student->all();
 	$js_encode = json_encode(array('state'=>TRUE, 'students'=>$students),true);
 	header("Content-Type: application/json");
@@ -54,12 +69,20 @@ switch($method) {
 	$name = $post_vars['name'];
 	$surname = $post_vars['surname'];
 	$sidi_code = $post_vars['sidi_code'];
-    $tax_code = $post_vars['tax_code'];
+    	$tax_code = $post_vars['tax_code'];
 	if (isset($id, $name, $surname, $sidi_code, $tax_code)){
-      $student = $student->updatestudent($id, $name, $surname, $sidi_code, $tax_code);
+      $result = $student->updatestudent($id, $name, $surname, $sidi_code, $tax_code);
     }else{
       echo("Dati inseriti non corretti");
     }
+    	if ($result>0)
+    	{
+    		echo("Sono state modificate".$result."righe");
+    	}
+    	else 
+    	{
+    		echo("Non sono stati trovati studenti con tale ID");
+    	}
 	$students = $student->all();
 	$js_encode = json_encode(array('state'=>TRUE, 'students'=>$students),true);
 	header("Content-Type: application/json");
