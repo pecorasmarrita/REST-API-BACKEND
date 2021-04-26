@@ -80,7 +80,7 @@ function addEmployee()
     };
 	console.log(JSONEmployee);
 	$.ajax({
-	url: 'http://localhost:8080/api/tutorial/1.0/employees/',
+	url: 'http://localhost/rest/tutorial/1.0/employees/',
 	type: 'post',
 	data : JSON.stringify(JSONEmployee),
 	contentType: 'application/json',
@@ -103,7 +103,7 @@ function editEmployee(id)
     };
 	console.log(JSONEmployee);
 	$.ajax({
-	url: 'http://localhost:8080/api/tutorial/1.0/employees/'+id,
+	url: 'http://localhost/rest/tutorial/1.0/employees/'+id,
 	type: 'put',
 	data : JSON.stringify(JSONEmployee),
 	contentType: 'application/json',
@@ -117,7 +117,7 @@ function editEmployee(id)
 function deleteEmployee(id)
 {
 	$.ajax({
-	url: "http://localhost:8080/api/tutorial/1.0/employees/"+id,
+	url: "http://localhost/rest/tutorial/1.0/employees/"+id,
     type: "delete",
     contentType: 'String',
     success: function (data,textstatus,jQxhr){
@@ -128,23 +128,27 @@ function deleteEmployee(id)
 
 $(document).ready(function() {
     $.ajax({
-	url: 'http://localhost:8080/api/tutorial/1.0/employees',
+	url: 'http://localhost/rest/student.php',
     type: 'get',
     contentType: 'application/json',
     
 	success: function(data, textstatus, jQxhr){  
+	console.log(data);
     let dataDefault = data;
     let html = '';
     $.each(data, function(key, value){
 		html += '<tr>';
-        html += '<td><input class="form-check-input" type="checkbox" name="checkbox" id="'+value.employeeId+'"></td>';
-        html += '<td><p>'+value.firstName+' '+value.lastName+'</p></td>'+'<td><p>'+value.email+'</p></td>'+'<td><p></p></td>'+'<td><p>'+value.phone+'</p></td>';
-        html += '<td><button class="btn btn"><img onClick="edit('+value.employeeId+')" class="buttonscss" src="img/editbutton.png"></button></td>';
-        html += '<td><button class="btn btn"><img onClick="getridof('+value.employeeId+')" class="buttonscss" src="img/removebutton.png"></button></td>';
+        html += '<td><input class="form-check-input" type="checkbox" name="checkbox" id="'+value.id+'"></td>';
+        html += '<td><p>'+value.name+' '+value.surname+'</p></td>'+'<td><p>'+value.sidi_code+'</p></td>'+'<td><p></p></td>'+'<td><p>'+value.tax_code+'</p></td>';
+        html += '<td><button class="btn btn"><img onClick="edit('+value.id+')" class="buttonscss" src="img/editbutton.png"></button></td>';
+        html += '<td><button class="btn btn"><img onClick="getridof('+value.id+')" class="buttonscss" src="img/removebutton.png"></button></td>';
         html += '<tr>';
-		lastEmployeeID = value.employeeId;
+		lastEmployeeID = value.id;
         });
     $('#manage_table').append(html);
-      }
+      },
+	error: function(jQxhr, textstatus, errorThrown){
+		console.log(errorThrown);
+	}
     });
 });

@@ -5,8 +5,8 @@ $student = new Student();
 
 switch($method) {
   case 'GET':
-    $id = $_GET['id'];
-    if (isset($id)){
+    if (isset($_GET['id'])){
+	  $id = $_GET['id'];
       $student = $student->find($id);
       $js_encode = json_encode(array('state'=>TRUE, 'student'=>$student),true);
     }else{
