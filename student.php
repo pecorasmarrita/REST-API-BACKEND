@@ -8,10 +8,12 @@ switch($method) {
     if (isset($_GET['id'])){
 	  $id = $_GET['id'];
       $student = $student->find($id);
-      $js_encode = json_encode(array('state'=>TRUE, 'student'=>$student),true);
+      // $js_encode = json_encode(array('state'=>TRUE, 'student'=>$student),true);
+	  $js_encode = json_encode($student);
     }else{
       $students = $student->all();
-      $js_encode = json_encode(array('state'=>TRUE, 'students'=>$students),true);
+      // $js_encode = json_encode(array('state'=>TRUE, 'students'=>$students),true);
+	  $js_encode = json_encode($students);
     }
     header("Content-Type: application/json");
     echo($js_encode);
